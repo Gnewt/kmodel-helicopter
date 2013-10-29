@@ -20,15 +20,21 @@ A note about checksums
 The checksums used by this helicopter are fairly simple. The checksum is equal to the sum of every 4-bit chunk of the command, truncated to 4 bits.
 
 For example, take the following command (full throttle, no other changes):
+
     1111111000001000000000000000 (length is 28 bits)
 
 To get the checksum:  
+
 1. Split the command into 4-bit chunks
+
         1111 1110 0000 1000 0000 0000 0000
 2. Add these chunks
+
         0b1111 + 0b1110 + 0b0000 + 0b1000 + 0b0000 + 0b0000 + 0b0000 = 0b100101
 3. Truncate the result
+
         0b100101 & 0b1111 = 0b0101
 
 Ta-da! 0101 is the checksum, making our whole command:
+
     11111110000010000000000000000101 (length is 32 bits)
